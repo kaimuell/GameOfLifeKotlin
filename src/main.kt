@@ -2,10 +2,15 @@ import org.testng.annotations.Test
 import kotlin.random.Random
 
 fun main(){
-    var world = generateWorld(20,40)
+    var world = generateWorld(20,60)
+    println("Game of Life: ")
     println("Enter for next Generation, q an Enter to quit")
+    println()
     var x = 'n'
+    var counter = 0
     while (x != 'q'){
+        counter ++
+        println("Generation $counter")
         printWorld(world)
         world = nextState(world)
         x = try {
@@ -16,7 +21,7 @@ fun main(){
 }
 
 fun nextState(world: Array<Array<Boolean>>): Array<Array<Boolean>> {
-    var nextWorldState = Array(world.size){Array(world[0].size) {false} }
+    val nextWorldState = Array(world.size){Array(world[0].size) {false} }
     for (i in 0..<world.size){
         for (j in 0..<world[i].size){
             val aliveNeighbours: Int = checkNeighbours(world, i, j)
